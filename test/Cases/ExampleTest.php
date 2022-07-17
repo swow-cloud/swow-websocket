@@ -79,6 +79,5 @@ class ExampleTest extends HttpTestCase
         $this->assertIsString($jwt);
         $this->assertIsObject($jws->unserialize($jwt));
         $this->assertIsBool($jws->verify($jwt));
-
     }
 }
