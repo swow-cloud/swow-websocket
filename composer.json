@@ -1,5 +1,7 @@
 {
     "name": "hyperf/swow-skeleton",
+    "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
+    "license": "MIT",
     "type": "project",
     "keywords": [
         "php",
@@ -9,10 +11,8 @@
         "microservice",
         "middleware"
     ],
-    "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
-    "license": "MIT",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-json": "*",
         "ext-openssl": "*",
         "ext-pdo": "*",
@@ -38,16 +38,25 @@
         "hyperf/pool": "3.0.*",
         "hyperf/process": "3.0.*",
         "hyperf/redis": "3.0.*",
-        "hyperf/server": "3.0.*",
-        "hyperf/utils": "3.0.*"
+        "hyperf/server": "3.0.x-dev",
+        "hyperf/utils": "3.0.*",
+        "hyperf/validation": "3.0.x",
+        "hyperf/websocket-server": "3.0.*",
+        "web-token/jwt-encryption": "^3.0",
+        "web-token/jwt-signature": "^3.0",
+        "web-token/jwt-signature-algorithm-hmac": "^3.0"
     },
     "require-dev": {
+        "chevere/var-dump": "^0.5.1",
+        "ergebnis/composer-normalize": "^2.28",
         "friendsofphp/php-cs-fixer": "^3.0",
         "hyperf/devtool": "3.0.*",
         "hyperf/testing": "3.0.*",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^1.0"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "App\\": "app/"
@@ -61,24 +70,25 @@
             "HyperfTest\\": "test/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
         "optimize-autoloader": true,
         "sort-packages": true
     },
     "extra": [],
     "scripts": {
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
         "post-autoload-dump": [
             "@php -r \"if(PHP_OS_FAMILY === 'Windows') shell_exec('del /f /s /q runtime\\container && rmdir runtime\\container'); else shell_exec('rm -rf runtime/container');\" "
         ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
         "analyse": "@php vendor/bin/phpstan analyse --memory-limit 512M -l 0 -c phpstan.neon ./app ./config",
         "cs-fix": "@php vendor/bin/php-cs-fixer fix $1",
+        "rector": "rector process --clear-cache",
         "start": "@php bin/hyperf.php start",
-        "test": "@php vendor/bin/phpunit -c phpunit.xml --colors=always",
-        "rector": "rector process --clear-cache"
+        "test": "@php vendor/bin/phpunit -c phpunit.xml --colors=always"
     }
 }

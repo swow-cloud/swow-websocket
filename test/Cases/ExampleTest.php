@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of Swow-Chat.
  *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
+
 namespace HyperfTest\Cases;
 
 use App\Kernel\Context\Coroutine;
 use App\Kernel\Log\AppendRequestIdProcessor;
+use App\Kernel\Token\Jws;
 use Hyperf\Context\Context;
 use Hyperf\Engine\Channel;
 use HyperfTest\HttpTestCase;
@@ -51,7 +52,7 @@ class ExampleTest extends HttpTestCase
         di()->get(Coroutine::class)->create(function () use ($pool) {
             try {
                 $all = Context::getContainer();
-                $pool->push((array) $all);
+                $pool->push((array)$all);
             } catch (\Throwable $exception) {
                 $pool->push(false);
             }
@@ -60,5 +61,24 @@ class ExampleTest extends HttpTestCase
         $data = $pool->pop();
         $this->assertIsArray($data);
         $this->assertSame($id, $data[AppendRequestIdProcessor::REQUEST_ID]);
+    }
+
+    public function testJws()
+    {
+        $this->assertTrue(true);
+        $jws = make(Jws::class);
+
+        $coreJws = $jws->create([
+            'iat' => time(),
+            'nbf' => time(),
+            'exp' => time() + 3600,
+            'iss' => 'My service',
+            'aud' => 'Your application',
+        ]);
+        $jwt = $jws->serialize($coreJws);
+        $this->assertIsString($jwt);
+        $this->assertIsObject($jws->unserialize($jwt));
+        $this->assertIsBool($jws->verify($jwt));
+
     }
 }

@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of Swow-Chat.
  *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
+use Hyperf\Validation\Middleware\ValidationMiddleware;
+
 return [
     'http' => [
+        ValidationMiddleware::class,
     ],
 ];
