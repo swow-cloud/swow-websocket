@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Swow-Chat.
  *
@@ -9,7 +8,6 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 use Jose\Component\Signature\Algorithm\HS256;
 use Jose\Component\Signature\Serializer\CompactSerializer;
 
@@ -22,5 +20,5 @@ return [
     'kty' => env('JSON_WEBTOKEN_KTY'),
     'serializer' => CompactSerializer::class,
     'signature_algorithms' => HS256::class,
-    'exp' => 3600
+    'exp' => 3600,
 ];

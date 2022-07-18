@@ -8,28 +8,42 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-use App\Kernel\Log;
+use Monolog\Formatter;
+use Monolog\Handler;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Level;
 
 return [
     'default' => [
-        'handler' => [
-            'class' => Monolog\Handler\StreamHandler::class,
-            'constructor' => [
-                'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
-                'level' => Monolog\Logger::INFO,
-            ],
-        ],
-        'formatter' => [
-            'class' => Monolog\Formatter\LineFormatter::class,
-            'constructor' => [
-                'format' => null,
-                'dateFormat' => 'Y-m-d H:i:s',
-                'allowInlineLineBreaks' => true,
-            ],
-        ],
-        'processors' => [
+        'handlers' => [
             [
-                'class' => Log\AppendRequestIdProcessor::class,
+                'class' => RotatingFileHandler::class,
+                'constructor' => [
+                    'filename' => BASE_PATH . '/runtime/logs/hyperf.log',
+                    'level' => Level::Info,
+                ],
+                'formatter' => [
+                    'class' => Monolog\Formatter\LineFormatter::class,
+                    'constructor' => [
+                        'format' => null,
+                        'dateFormat' => null,
+                        'allowInlineLineBreaks' => true,
+                    ],
+                ],
+            ],
+            [
+                'class' => Handler\StreamHandler::class,
+                'constructor' => [
+                    'stream' => BASE_PATH . '/runtime/logs/hyperf-debug.log',
+                    'level' => Level::Debug,
+                ],
+                'formatter' => [
+                    'class' => Formatter\JsonFormatter::class,
+                    'constructor' => [
+                        'batchMode' => Formatter\JsonFormatter::BATCH_MODE_JSON,
+                        'appendNewline' => true,
+                    ],
+                ],
             ],
         ],
     ],

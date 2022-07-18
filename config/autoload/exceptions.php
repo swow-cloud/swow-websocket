@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 use App\Exception\Handler\ValidationExceptionHandler;
 
 return [

@@ -8,7 +8,6 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 namespace HyperfTest\Cases;
 
 use App\Kernel\Context\Coroutine;
@@ -52,7 +51,7 @@ class ExampleTest extends HttpTestCase
         di()->get(Coroutine::class)->create(function () use ($pool) {
             try {
                 $all = Context::getContainer();
-                $pool->push((array)$all);
+                $pool->push((array) $all);
             } catch (\Throwable $exception) {
                 $pool->push(false);
             }

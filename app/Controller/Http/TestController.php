@@ -1,6 +1,13 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
+/**
+ * This file is part of Swow-Chat.
+ *
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
+ */
 namespace App\Controller\Http;
 
 use App\Controller\Controller;
@@ -11,9 +18,6 @@ use Hyperf\HttpServer\Annotation\GetMapping;
 class TestController extends Controller
 {
     #[GetMapping(path: 'jws')]
-    /**
-     * @return void
-     */
     public function jws()
     {
         $jws = make(Jws::class);
@@ -30,6 +34,5 @@ class TestController extends Controller
 
         vd($jws->unserialize($jwt));
         vd($jws->verify($jwt));
-
     }
 }

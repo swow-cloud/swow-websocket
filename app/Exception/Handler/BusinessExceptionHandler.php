@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
+use App\Constants\HttpCode;
 use App\Exception\BusinessException;
 use App\Kernel\Http\Response;
 use Hyperf\Contract\StdoutLoggerInterface;
@@ -49,7 +50,7 @@ class BusinessExceptionHandler extends ExceptionHandler
 
         $this->logger->error(format_throwable($throwable));
 
-        return $this->response->fail(ErrorCode::SERVER_ERROR, 'Server Error');
+        return $this->response->fail(HttpCode::FAIL, 'Server Error');
     }
 
     public function isValid(Throwable $throwable): bool

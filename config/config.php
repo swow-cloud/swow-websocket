@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of Swow-Chat.
  *
@@ -9,7 +8,6 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Log\LogLevel;
 
@@ -26,7 +24,7 @@ return [
             LogLevel::ERROR,
             LogLevel::INFO,
             LogLevel::NOTICE,
-            LogLevel::WARNING
+            LogLevel::WARNING,
         ],
     ],
 ];

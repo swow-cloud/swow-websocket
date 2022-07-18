@@ -10,7 +10,6 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 namespace App\Kernel\Http;
 
 use App\Constants\HttpCode;
@@ -58,7 +57,7 @@ class Response
     public function redirect($url, int $status = 302): PsrResponseInterface
     {
         return $this->response()
-            ->withAddedHeader('Location', (string)$url)
+            ->withAddedHeader('Location', (string) $url)
             ->withStatus($status);
     }
 

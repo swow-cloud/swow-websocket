@@ -28,18 +28,21 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|max:255',
-            'email' => 'required|email',
-            'password' => 'required',
+            'nickname' => 'required|max:20',
+            'mobile' => 'required|phone',
+            'password' => 'required|max:16',
+            'sms_code' => 'required|digits:6',
+            'platform' => 'required|in:h5,ios,windows,mac,web',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'username.required' => '用户名称不能为空',
-            'email.required' => '邮箱不能为空',
+            'nickname.required' => '用户名称不能为空',
+            'mobile.required' => '手机不能为空',
             'password.required' => '密码不能为空',
+            'sms_code.required' => '验证码不能为空',
         ];
     }
 }

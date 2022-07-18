@@ -12,15 +12,16 @@ namespace App\Model;
 
 /**
  * @property int $id
+ * @property string $mobile
+ * @property string $nickname
+ * @property string $avatar
+ * @property int $gender
+ * @property string $password
+ * @property string $motto
+ * @property string $email
+ * @property int $is_robot
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $email
- * @property string $password
- * @property int $status
- * @property string $sign
- * @property string $avatar
- * @property string $deleted_at
- * @property string $username
  */
 class User extends Model
 {
@@ -32,10 +33,10 @@ class User extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected array $fillable = ['id', 'created_at', 'updated_at', 'email', 'password', 'status', 'sign', 'avatar', 'deleted_at', 'username'];
+    protected array $fillable = ['id', 'mobile', 'nickname', 'avatar', 'gender', 'password', 'motto', 'email', 'is_robot', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      */
-    protected array $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'status' => 'integer'];
+    protected array $casts = ['id' => 'integer', 'gender' => 'integer', 'is_robot' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }

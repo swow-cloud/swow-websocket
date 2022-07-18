@@ -17,7 +17,6 @@ use Jose\Component\Signature\JWS as JoseJWS;
 use Jose\Component\Signature\JWSBuilder;
 use Jose\Component\Signature\JWSVerifier;
 use Jose\Component\Signature\Serializer\JWSSerializer;
-use Psr\Container\ContainerInterface;
 
 /**
  * 验证签名.

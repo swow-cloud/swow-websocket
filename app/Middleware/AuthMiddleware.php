@@ -1,7 +1,13 @@
 <?php
 
 declare(strict_types=1);
-
+/**
+ * This file is part of Swow-Chat.
+ *
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
+ */
 namespace App\Middleware;
 
 use App\Exception\TokenValidException;
@@ -13,8 +19,8 @@ use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Utils\Codec\Json;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthMiddleware implements MiddlewareInterface
@@ -22,6 +28,7 @@ class AuthMiddleware implements MiddlewareInterface
     protected string $prefix = 'Bearer';
 
     protected Response $response;
+
     protected Jws $jws;
 
     public function __construct(StdoutLoggerInterface $stdoutLogger, Response $response, Jws $jws)
@@ -46,7 +53,6 @@ class AuthMiddleware implements MiddlewareInterface
                 return $handler->handle($request);
             }
             return $this->response->response()->withHeader('Server', 'Swow-Chat')->withStatus(403)->withBody(new SwooleStream('无权限访问!'));
-
         } catch (TokenValidException) {
             return $this->response->response()->withHeader('Server', 'Swow-Chat')->withStatus(401)->withBody(new SwooleStream('Token authentication does not pass'));
         } catch (\Throwable $exception) {
@@ -69,12 +75,11 @@ class AuthMiddleware implements MiddlewareInterface
 
     protected function setRequestContext(string $token): ServerRequestInterface
     {
-        $uid = (int)($this->jws->unserialize($token)->getPayload()['uid'] ?? 0);
+        $uid = (int) ($this->jws->unserialize($token)->getPayload()['uid'] ?? 0);
         $user = UserService::get($uid);
         $request = Context::get(ServerRequestInterface::class);
         $request = $request->withAttribute('user', $user);
         Context::set(ServerRequestInterface::class, $request);
         return $request;
     }
-
 }

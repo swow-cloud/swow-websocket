@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Hyperf.
+ * This file is part of Swow-Chat.
  *
- * @link     https://www.hyperf.io
- * @document https://hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 namespace App\Exception\Handler;
 
+use App\Constants\HttpCode;
 use App\Kernel\Http\Response;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\Validation\ValidationException;
@@ -25,7 +24,7 @@ class ValidationExceptionHandler extends ExceptionHandler
         $this->stopPropagation();
         /** @var ValidationException $throwable */
         $body = $throwable->validator->errors()->first();
-        return make(Response::class)->fail($throwable->status, $body);
+        return make(Response::class)->fail(HttpCode::FAIL, $body);
     }
 
     public function isValid(Throwable $throwable): bool

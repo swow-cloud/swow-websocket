@@ -8,17 +8,14 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
-
 namespace App\Controller\Http\Sys;
 
 use App\Constants\HttpCode;
 use App\Controller\Controller;
 use App\Kernel\Token\Jws;
-use App\Middleware\AuthMiddleware;
 use App\Request\LoginRequest;
 use App\Request\RegisterRequest;
 use App\Service\UserService;
-use Hyperf\HttpServer\Annotation\Middleware;
 use Hyperf\HttpServer\Annotation\PostMapping;
 use Hyperf\HttpServer\Annotation\RequestMapping;
 use Psr\Container\ContainerExceptionInterface;
@@ -29,9 +26,6 @@ use Psr\Http\Message\ResponseInterface;
 #[\Hyperf\HttpServer\Annotation\Controller(prefix: '/sys/user', server: 'http')]
 class UserController extends Controller
 {
-    /**
-     * @var Jws
-     */
     protected Jws $jws;
 
     /**
@@ -49,29 +43,25 @@ class UserController extends Controller
     public function register(RegisterRequest $request): ResponseInterface
     {
         $requestData = $request->validated();
-        $register = UserService::register($requestData['email'], $requestData['username'], $requestData['password']);
+        $register = UserService::register($requestData['mobile'], $requestData['username'], $requestData['password']);
         if ($register) {
             return $this->response->success('注册成功!');
         }
         return $this->response->fail(HttpCode::FAIL, '注册失败,请稍后再试!');
     }
 
-    /**
-     * @param LoginRequest $request
-     * @return ResponseInterface
-     */
     #[PostMapping(path: 'login')]
     public function login(LoginRequest $request): ResponseInterface
     {
         $requestData = $request->validated();
-        $user = UserService::login($requestData['email'], $requestData['password']);
+        $user = UserService::login($requestData['mobile'], $requestData['password']);
         $coreJws = $this->jws->create([
             'iat' => time(),
             'nbf' => time(),
             'exp' => time() + config('jws.exp'),
             'iss' => 'Swow Service',
             'aud' => 'Swow-Chat',
-            'uid' => $user->id
+            'uid' => $user->id,
         ]);
         $jwt = $this->jws->serialize($coreJws);
         return $this->response->success([

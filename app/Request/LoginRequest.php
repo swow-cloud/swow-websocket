@@ -28,15 +28,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'mobile' => 'required',
             'password' => 'required',
+            'platform' => 'required|in:h5,ios,windows,mac,web',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'email.required' => '邮箱不能为空',
+            'mobile.required' => '手机不能为空',
+            'mobile.phone' => '手机格式不正确',
             'password.required' => '密码不能为空',
         ];
     }
