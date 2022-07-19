@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'mobile' => 'required',
+            'mobile' => 'phone|required',
             'password' => 'required',
             'platform' => 'required|in:h5,ios,windows,mac,web',
         ];

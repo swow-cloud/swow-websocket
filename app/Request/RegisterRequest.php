@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
  */
+
 namespace App\Request;
 
 use Hyperf\Validation\Request\FormRequest;
@@ -29,7 +30,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'nickname' => 'required|max:20',
-            'mobile' => 'required|phone',
+            'mobile' => 'phone|required',
             'password' => 'required|max:16',
             'sms_code' => 'required|digits:6',
             'platform' => 'required|in:h5,ios,windows,mac,web',
@@ -41,6 +42,7 @@ class RegisterRequest extends FormRequest
         return [
             'nickname.required' => '用户名称不能为空',
             'mobile.required' => '手机不能为空',
+            'mobile.phone' => '手机号不正确',
             'password.required' => '密码不能为空',
             'sms_code.required' => '验证码不能为空',
         ];
