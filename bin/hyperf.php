@@ -5,9 +5,9 @@
  *
  * @link     https://xxx.com
  * @document https://xxx.wiki
- * @license  https://github.com/swow-cloud/websocket-server/master/LICENSE
+ * @license  https://github.com/swow-cloud/swow-websocket/master/LICENSE
  */
-use Swow\Debug\Debugger;
+use SwowCloud\Debugger\Debugger;
 
 ini_set('display_errors', 'on');
 ini_set('display_startup_errors', 'on');
@@ -16,7 +16,6 @@ error_reporting(E_ALL);
 date_default_timezone_set('Asia/Shanghai');
 
 ! defined('BASE_PATH') && define('BASE_PATH', dirname(__DIR__, 1));
-! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', 0);
 
 require BASE_PATH . '/vendor/autoload.php';
 

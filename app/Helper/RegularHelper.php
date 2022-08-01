@@ -1,6 +1,13 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
+/**
+ * This file is part of Swow-Chat.
+ *
+ * @link     https://xxx.com
+ * @document https://xxx.wiki
+ * @license  https://github.com/swow-cloud/swow-websocket/master/LICENSE
+ */
 namespace App\Helper;
 
 /**
@@ -17,7 +24,6 @@ class RegularHelper
         'ids' => self::REG_IDS,
     ];
 
-
     public static function getAliasRegular(string $regular): string
     {
         return self::REG_MAP[$regular];
@@ -25,6 +31,6 @@ class RegularHelper
 
     public static function verify(string $regular, int|string $value): bool
     {
-        return (bool)preg_match(self::getAliasRegular($regular), $value);
+        return (bool) preg_match(self::getAliasRegular($regular), $value);
     }
 }
