@@ -21,7 +21,6 @@ use Hyperf\HttpMessage\Exception\HttpException;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
 class BusinessExceptionHandler extends ExceptionHandler
 {
@@ -35,7 +34,7 @@ class BusinessExceptionHandler extends ExceptionHandler
         $this->logger = $container->get(StdoutLoggerInterface::class);
     }
 
-    public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
+    public function handle(\Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         switch (true) {
             case $throwable instanceof HttpException:
@@ -53,7 +52,7 @@ class BusinessExceptionHandler extends ExceptionHandler
         return $this->response->fail(HttpCode::FAIL, 'Server Error');
     }
 
-    public function isValid(Throwable $throwable): bool
+    public function isValid(\Throwable $throwable): bool
     {
         return true;
     }

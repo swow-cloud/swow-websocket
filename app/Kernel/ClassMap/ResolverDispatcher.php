@@ -16,7 +16,6 @@ use Hyperf\Di\Definition\ObjectDefinition;
 use Hyperf\Di\Definition\SelfResolvingDefinitionInterface;
 use Hyperf\Di\Exception\InvalidDefinitionException;
 use Psr\Container\ContainerInterface;
-use RuntimeException;
 
 class ResolverDispatcher implements ResolverInterface
 {
@@ -33,8 +32,8 @@ class ResolverDispatcher implements ResolverInterface
      *
      * @param DefinitionInterface $definition object that defines how the value should be obtained
      * @param array $parameters optional parameters to use to build the entry
-     * @throws InvalidDefinitionException if the definition cannot be resolved
      * @return mixed value obtained from the definition
+     * @throws InvalidDefinitionException if the definition cannot be resolved
      */
     public function resolve(DefinitionInterface $definition, array $parameters = [])
     {
@@ -65,7 +64,7 @@ class ResolverDispatcher implements ResolverInterface
     /**
      * Returns a resolver capable of handling the given definition.
      *
-     * @throws RuntimeException no definition resolver was found for this type of definition
+     * @throws \RuntimeException no definition resolver was found for this type of definition
      */
     private function getDefinitionResolver(DefinitionInterface $definition): ResolverInterface
     {
@@ -81,7 +80,7 @@ class ResolverDispatcher implements ResolverInterface
                 }
                 return $this->factoryResolver;
             default:
-                throw new RuntimeException('No definition resolver was configured for definition of type ' . get_class($definition));
+                throw new \RuntimeException('No definition resolver was configured for definition of type ' . get_class($definition));
         }
     }
 }

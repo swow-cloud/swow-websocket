@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 namespace App\Controller\Http\Http;
 
-use App\Controller\Http\Controller;
+use App\Controller\Controller;
 use App\Kernel\Token\Jws;
 use Hyperf\HttpServer\Annotation\GetMapping;
 

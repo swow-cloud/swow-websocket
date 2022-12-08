@@ -18,7 +18,6 @@ use Hyperf\Utils;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
 class Coroutine
 {
@@ -44,7 +43,7 @@ class Coroutine
                     ServerRequestInterface::class,
                 ]);
                 call($callable);
-            } catch (Throwable $throwable) {
+            } catch (\Throwable $throwable) {
                 $this->logger->warning((string) $throwable);
             }
         });

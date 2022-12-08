@@ -15,7 +15,6 @@ use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
 
 class RPCExceptionHandler extends ExceptionHandler
 {
@@ -23,7 +22,7 @@ class RPCExceptionHandler extends ExceptionHandler
     {
     }
 
-    public function handle(Throwable $throwable, ResponseInterface $response): ResponseInterface
+    public function handle(\Throwable $throwable, ResponseInterface $response): ResponseInterface
     {
         if ($throwable instanceof BusinessException) {
             $this->logger->warning($this->formatter->format($throwable));
@@ -34,7 +33,7 @@ class RPCExceptionHandler extends ExceptionHandler
         return $response;
     }
 
-    public function isValid(Throwable $throwable): bool
+    public function isValid(\Throwable $throwable): bool
     {
         return true;
     }
