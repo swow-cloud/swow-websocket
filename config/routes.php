@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/swow-websocket/master/LICENSE
  */
-use App\Controller\Http\WebSocketController;
+use App\Controller\WebSocketController;
 /*
  * This file is part of Hyperf.
  *

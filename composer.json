@@ -1,102 +1,107 @@
 {
-    "name": "hyperf/swow-skeleton",
-    "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
-    "license": "MIT",
-    "type": "project",
-    "keywords": [
-        "php",
-        "swow",
-        "framework",
-        "hyperf",
-        "microservice",
-        "middleware"
-    ],
-    "require": {
-        "php": ">=8.1",
-        "ext-json": "*",
-        "ext-openssl": "*",
-        "ext-pdo": "*",
-        "ext-pdo_mysql": "*",
-        "ext-redis": "*",
-        "hyperf/cache": "3.0.*",
-        "hyperf/command": "3.0.*",
-        "hyperf/config": "3.0.*",
-        "hyperf/constants": "3.0.*",
-        "hyperf/contract": "3.0.*",
-        "hyperf/database": "3.0.*",
-        "hyperf/db-connection": "3.0.*",
-        "hyperf/di": "3.0.*",
-        "hyperf/dispatcher": "3.0.*",
-        "hyperf/engine-swow": "^2.1",
-        "hyperf/event": "3.0.*",
-        "hyperf/exception-handler": "3.0.*",
-        "hyperf/framework": "3.0.*",
-        "hyperf/guzzle": "3.0.*",
-        "hyperf/http-server": "3.0.*",
-        "hyperf/logger": "3.0.*",
-        "hyperf/model-cache": "3.0.*",
-        "hyperf/pool": "3.0.*",
-        "hyperf/process": "3.0.*",
-        "hyperf/redis": "3.0.*",
-        "hyperf/server": "3.0.x-dev",
-        "hyperf/utils": "3.0.*",
-        "hyperf/validation": "3.0.x",
-        "hyperf/websocket-server": "3.0.*",
-        "league/climate": "^3.8",
-        "swow-cloud/debugger": "dev-master",
-        "web-token/jwt-encryption": "^3.0",
-        "web-token/jwt-signature": "^3.0",
-        "web-token/jwt-signature-algorithm-hmac": "^3.0",
-      "ext-http": "*"
+  "name": "hyperf/swow-skeleton",
+  "description": "A coroutine framework that focuses on hyperspeed and flexible, specifically use for build microservices and middlewares.",
+  "license": "MIT",
+  "type": "project",
+  "keywords": [
+    "php",
+    "swow",
+    "framework",
+    "hyperf",
+    "microservice",
+    "middleware"
+  ],
+  "require": {
+    "php": ">=8.1",
+    "ext-json": "*",
+    "ext-openssl": "*",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "ext-redis": "*",
+    "hyperf/cache": "3.0.*",
+    "hyperf/command": "3.0.*",
+    "hyperf/config": "3.0.*",
+    "hyperf/constants": "3.0.*",
+    "hyperf/contract": "3.0.*",
+    "hyperf/database": "3.0.*",
+    "hyperf/db-connection": "3.0.*",
+    "hyperf/di": "3.0.*",
+    "hyperf/dispatcher": "3.0.*",
+    "hyperf/engine-swow": "^2.1",
+    "hyperf/event": "3.0.*",
+    "hyperf/exception-handler": "3.0.*",
+    "hyperf/framework": "3.0.*",
+    "hyperf/guzzle": "3.0.*",
+    "hyperf/http-server": "3.0.*",
+    "hyperf/logger": "3.0.*",
+    "hyperf/model-cache": "3.0.*",
+    "hyperf/pool": "3.0.*",
+    "hyperf/process": "3.0.*",
+    "hyperf/redis": "3.0.*",
+    "hyperf/server": "3.0.x-dev",
+    "hyperf/utils": "3.0.*",
+    "hyperf/validation": "3.0.x",
+    "hyperf/websocket-server": "3.0.*",
+    "league/climate": "^3.8",
+    "swow-cloud/debugger": "dev-master",
+    "swow-cloud/swow-websocket": "dev-master",
+    "web-token/jwt-encryption": "^3.0",
+    "web-token/jwt-signature": "^3.0",
+    "web-token/jwt-signature-algorithm-hmac": "^3.0"
+  },
+  "require-dev": {
+    "chevere/var-dump": "^0.5.1",
+    "ergebnis/composer-normalize": "^2.28",
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "hyperf/devtool": "3.0.*",
+    "hyperf/testing": "3.0.*",
+    "mockery/mockery": "^1.0",
+    "phpstan/phpstan": "^1.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
     },
-    "require-dev": {
-        "chevere/var-dump": "^0.5.1",
-        "ergebnis/composer-normalize": "^2.28",
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "hyperf/devtool": "3.0.*",
-        "hyperf/testing": "3.0.*",
-        "mockery/mockery": "^1.0",
-        "phpstan/phpstan": "^1.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
-        "files": [
-            "app/Kernel/Functions.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HyperfTest\\": "test/"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "ergebnis/composer-normalize": true
-        },
-        "optimize-autoloader": true,
-        "sort-packages": true
-    },
-    "repositories": [{
-        "type": "path",
-        "url": "./debugger"
+    "files": [
+      "app/Kernel/Functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HyperfTest\\": "test/"
     }
-    ],
-    "extra": [],
-    "scripts": {
-        "post-autoload-dump": [
-            "@php -r \"if(PHP_OS_FAMILY === 'Windows') shell_exec('del /f /s /q runtime\\container && rmdir runtime\\container'); else shell_exec('rm -rf runtime/container');\" "
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "analyse": "@php vendor/bin/phpstan analyse --memory-limit 512M -l 0 -c phpstan.neon ./app ./config",
-        "cs-fix": "@php vendor/bin/php-cs-fixer fix $1",
-        "rector": "rector process --clear-cache",
-        "start": "@php bin/hyperf.php start",
-        "test": "@php vendor/bin/phpunit -c phpunit.xml --colors=always"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "./debugger"
+    },
+    {
+      "type": "path",
+      "url": "./swow-websocket"
     }
+  ],
+  "extra": [],
+  "scripts": {
+    "post-autoload-dump": [
+      "@php -r \"if(PHP_OS_FAMILY === 'Windows') shell_exec('del /f /s /q runtime\\container && rmdir runtime\\container'); else shell_exec('rm -rf runtime/container');\" "
+    ],
+    "post-root-package-install": [
+      "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+    ],
+    "analyse": "@php vendor/bin/phpstan analyse --memory-limit 512M -l 0 -c phpstan.neon ./app ./config",
+    "cs-fix": "@php vendor/bin/php-cs-fixer fix $1",
+    "rector": "rector process --clear-cache",
+    "start": "@php bin/hyperf.php start",
+    "test": "@php vendor/bin/phpunit -c phpunit.xml --colors=always"
+  }
 }
