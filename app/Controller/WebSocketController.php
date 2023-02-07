@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @document https://xxx.wiki
  * @license  https://github.com/swow-cloud/swow-websocket/master/LICENSE
  */
+
 namespace App\Controller;
 
 use Hyperf\Contract\OnCloseInterface;
@@ -36,11 +37,20 @@ class WebSocketController implements OnOpenInterface, OnMessageInterface, OnClos
 
     public function onClose($server, int $fd, int $reactorId): void
     {
-        vd(33333);
     }
 
+    /**
+     * @param ServerConnection $server
+     * @param ServerRequest $request
+     */
     public function onMessage($server, $frame): void
     {
+        $sender = make(Sender::class);
+        try {
+            $sender->broadcastMessage($server->recvWebSocketFrame());
+        } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+            vd($e);
+        }
     }
 
     /**
@@ -49,7 +59,6 @@ class WebSocketController implements OnOpenInterface, OnMessageInterface, OnClos
      */
     public function onOpen($server, $request): void
     {
-        $sender = make(Sender::class, ['container' => ApplicationContext::getContainer()]);
-        $sender->broadcastMessage('呵呵');
+        ClientManager::add($server->getFd(), $server);
     }
 }
